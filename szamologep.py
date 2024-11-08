@@ -23,7 +23,7 @@ root = Tk()
 root.title("Számológép")
 
 # Beviteli mező
-entry = Entry(root, width=20, font=("Arial", 24), borderwidth=2, relief="solid", justify="right")
+entry = Entry(root, bg="#a4c3b2",width=20, font=("Arial", 24), borderwidth=2, relief="solid", justify="right")
 entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
 # Gombok elrendezése
@@ -38,11 +38,14 @@ buttons = [
 # Gombok hozzáadása a tkinter ablakhoz
 for (text, row, col) in buttons:
     if text == "=":
-        Button(root, text=text, bg="#edffd3",width=5, height=2, font=("Arial", 18), command=calculate).grid(row=row, column=col, padx=5, pady=5)
+        Button(root, text=text, bg="#a4c3b2",width=5, height=2, font=("Arial", 18), command=calculate).grid(row=row, column=col, padx=5, pady=5)
     elif text == "C":
-        Button(root, text=text, bg="#edffd3", width=5, height=2, font=("Arial", 18), command=clear).grid(row=row, column=col, padx=5, pady=5)
+        Button(root, text=text, bg="#a4c3b2", width=5, height=2, font=("Arial", 18), command=clear).grid(row=row, column=col, padx=5, pady=5)
     else:
-        Button(root, text=text, bg="#edffd3", width=5, height=2, font=("Arial", 18), command=lambda value=text: button_click(value)).grid(row=row, column=col, padx=5, pady=5)
+        Button(root, text=text, bg="#a4c3b2", width=5, height=2, font=("Arial", 18), command=lambda value=text: button_click(value)).grid(row=row, column=col, padx=5, pady=5)
+
+#Háttér szín
+root.configure(bg="#cce3de")
 
 # Futtatás
 root.mainloop()
