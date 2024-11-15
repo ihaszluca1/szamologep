@@ -1,80 +1,66 @@
+#importáljuk a tkintert
 from tkinter import *
 
-# Funkciók a műveletekhez
-def button_click(value):
-    current = entry.get()
-    entry.delete(0, END)  # Töröljük az aktuális bejegyzést
-    entry.insert(END, current + value)  # Hozzáadjuk a következő számot/műveletet
 
-def clear():
-    entry.delete(0, END)  # Töröljük a beviteli mezőt
+#ablak létrehozása
+root = Tk()
+#ablak elnevezése
+root.title("Számológép")
 
+
+#a számolós függvény létrehozás
 def calculate():
     try:
-        result = eval(entry.get())  # Kiértékeljük a matematikai kifejezést
-        entry.delete(0, END)
-        entry.insert(END, str(result))
-    except Exception as e:
+        result = eval(entry.get())
+        entry.delete(0, END)    # törli a beviteli mezőt a 0.elemtől az utolsóig
+        entry.insert(END, str(result))  
+    except Exception as e:      # hiba esetén kiírja hogy "Hiba"
         entry.delete(0, END)
         entry.insert(END, "Hiba")
 
-# Ablak létrehozása
-root = Tk()
-root.title("Számológép")
 
-# Beviteli mező
-entry = Entry(root, bg="#a4c3b2",width=20, font=("Arial", 24), borderwidth=2, relief="solid", justify="right")
-entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
-# Gombok elrendezése
+#a törlés függvény létrehozás
+def clear():
+    entry.delete(0, END)
+
+
+
+#az értékek megjegyzés függvény létrehozás
+def buttonclick(value):
+    current = entry.get()
+    entry.delete(0, END)
+    entry.insert(END, current + value)
+
+
+
+#háttér szín beállítása
+root.config(bg="#cce3de")
+
+
+
+#bekérő mező megcsinálása
+entry = Entry(root, bg="#a4c3b2", width=20, font=("Arial", 24), borderwidth=2, relief= "solid", justify="right")
+entry.grid(column=0, row=0, columnspan=4, padx=10, pady=10)
+
+
+
+#gombok elkészítése és elhelyezése
 buttons = [
-    ('7', 1, 0), ('8', 1, 1), ('9', 1, 2), ('/', 1, 3),
-    ('4', 2, 0), ('5', 2, 1), ('6', 2, 2), ('*', 2, 3),
-    ('1', 3, 0), ('2', 3, 1), ('3', 3, 2), ('-', 3, 3),
-    ('0', 4, 0), ('.', 4, 1), ('+', 4, 2), ('=', 4, 3),
-    ('C', 5, 0)
+    ("7", 1, 0), ("8", 1, 1), ("9", 1, 2), ("/", 1, 3),
+    ("4", 2, 0), ("5", 2, 1), ("6", 2, 2), ("*", 2, 3),
+    ("1", 3, 0), ("2", 3, 1), ("3", 3, 2), ("-", 3, 3),
+    ("0", 4, 0), (".", 4, 1), ("+", 4, 2), ("=", 4, 3),
+    ("C", 5, 0),
 ]
-
-# Gombok hozzáadása a tkinter ablakhoz
 for (text, row, col) in buttons:
     if text == "=":
-        Button(root, text=text, bg="#a4c3b2",width=5, height=2, font=("Arial", 18), command=calculate).grid(row=row, column=col, padx=5, pady=5)
+        Button(root, text=text, bg="#a4c3b2", width=5, height=2, font=("Arial", 18), command=calculate).grid(row=row, column=col, padx=5, pady=5)
     elif text == "C":
         Button(root, text=text, bg="#a4c3b2", width=5, height=2, font=("Arial", 18), command=clear).grid(row=row, column=col, padx=5, pady=5)
     else:
-        Button(root, text=text, bg="#a4c3b2", width=5, height=2, font=("Arial", 18), command=lambda value=text: button_click(value)).grid(row=row, column=col, padx=5, pady=5)
-
-#Háttér szín
-root.configure(bg="#cce3de")
-
-# Futtatás
-root.mainloop()
+        Button(root, text=text, bg="#a4c3b2", width=5, height=2, font=("Arial", 18), command=lambda value=text: buttonclick(value)).grid(row=row, column=col, padx=5, pady=5)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Utasítás cimke
-#cimke = Label(root, text="Tippelj egy számot")
-#cimke.pack()
-
-
-#Bekérés
-#bemenet = Entry(root)
-#bemenet.pack()
-
-
-
-
-# Event loop létrehozása
+#futattás
 root.mainloop()
